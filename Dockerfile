@@ -7,7 +7,7 @@ RUN set -x \
   && chmod +x /usr/local/bin/composer \
   && curl -sSLO http://www-us.apache.org/dist//ant/binaries/apache-ant-$ANT_VERSION-bin.tar.gz \
   && tar -C /usr/local -xzf apache-ant-$ANT_VERSION-bin.tar.gz \
-  && ln -s /usr/local/apache-ant-$ANT_VERSION/bin/ant /usr/local/bin/ant
+  && ln -s /usr/local/apache-ant-$ANT_VERSION/bin/ant /usr/local/bin/ant \
   && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927 \
   && echo "deb http://repo.mongodb.org/apt/debian jessie/mongodb-org/3.2 main" | tee /etc/apt/sources.list.d/mongodb-org-3.2.list \
   && apt-get update \
