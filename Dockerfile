@@ -10,4 +10,5 @@ RUN set -x \
   && rm -rf /var/lib/apt/lists/* \
   && docker-php-ext-install -j$(nproc) bcmath mcrypt pdo pdo_mysql mysqli dom json xml tokenizer curl mbstring simplexml intl \
   && pecl install mongodb \
-  && docker-php-ext-enable mongodb
+  && echo '' | pecl install apcu-4.0.11 \
+  && docker-php-ext-enable mongodb apcu
