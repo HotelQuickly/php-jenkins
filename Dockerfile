@@ -1,6 +1,7 @@
 FROM php:5.6-cli
 
 ENV ANT_VERSION 1.9.7
+ENV NR_INSTALL_SILENT true
 
 RUN set -x \
   && curl -sSL https://getcomposer.org/composer.phar -o /usr/local/bin/composer \
@@ -18,5 +19,6 @@ RUN set -x \
   && rm -rf /var/lib/apt/lists/* \
   && docker-php-ext-install -j$(nproc) bcmath mcrypt pdo pdo_mysql mysqli dom json xml tokenizer curl mbstring simplexml intl \
   && pecl install mongodb \
+  && newrelic-install install \
   && echo '' | pecl install apcu-4.0.11 \
   && docker-php-ext-enable mongodb apcu
