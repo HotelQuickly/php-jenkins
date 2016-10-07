@@ -11,8 +11,10 @@ RUN set -x \
   && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927 \
   && echo "deb http://repo.mongodb.org/apt/debian jessie/mongodb-org/3.2 main" | tee /etc/apt/sources.list.d/mongodb-org-3.2.list \
   && echo "deb http://httpredir.debian.org/debian/ jessie-backports main" | tee /etc/apt/sources.list.d/backports.list \
+  && wget -O - https://download.newrelic.com/548C16BF.gpg | sudo apt-key add - \
+  && sudo sh -c 'echo "deb http://apt.newrelic.com/debian/ newrelic non-free" > /etc/apt/sources.list.d/newrelic.list' \
   && apt-get update \
-  && apt-get install -y openjdk-8-jdk libicu-dev libcurl4-gnutls-dev libxml2-dev libssl-dev libmcrypt-dev git unzip mongodb-org-shell mysql-client --no-install-recommends \
+  && apt-get install -y openjdk-8-jdk libicu-dev libcurl4-gnutls-dev libxml2-dev libssl-dev libmcrypt-dev git unzip mongodb-org-shell mysql-client newrelic-php5 --no-install-recommends \
   && rm -rf /var/lib/apt/lists/* \
   && docker-php-ext-install -j$(nproc) bcmath mcrypt pdo pdo_mysql mysqli dom json xml tokenizer curl mbstring simplexml intl \
   && pecl install mongodb \
