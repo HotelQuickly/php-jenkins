@@ -17,7 +17,7 @@ RUN set -x \
   && apt-get update \
   && apt-get install -y openjdk-8-jdk libicu-dev libcurl4-gnutls-dev libxml2-dev libssl-dev libmcrypt-dev git unzip mongodb-org-shell mysql-client newrelic-php5 --no-install-recommends \
   && rm -rf /var/lib/apt/lists/* \
-  && docker-php-ext-install -j$(nproc) bcmath mcrypt pdo pdo_mysql mysqli dom json xml tokenizer curl mbstring simplexml intl \
+  && docker-php-ext-install -j$(nproc) bcmath mcrypt pdo pdo_mysql mysqli dom json xml tokenizer curl mbstring simplexml intl zip \
   && pecl install mongodb \
   && newrelic-install install \
   && echo '' | pecl install apcu-4.0.11 \
