@@ -9,10 +9,10 @@ RUN set -x \
   && curl -sSLO http://www-us.apache.org/dist//ant/binaries/apache-ant-$ANT_VERSION-bin.tar.gz \
   && tar -C /usr/local -xzf apache-ant-$ANT_VERSION-bin.tar.gz \
   && ln -s /usr/local/apache-ant-$ANT_VERSION/bin/ant /usr/local/bin/ant \
-  && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927 \
-  && echo "deb http://repo.mongodb.org/apt/debian jessie/mongodb-org/3.2 main" | tee /etc/apt/sources.list.d/mongodb-org-3.2.list \
-  && echo "deb http://httpredir.debian.org/debian/ jessie-backports main" | tee /etc/apt/sources.list.d/backports.list \
-  && apt-key adv --keyserver hkp://keys.gnupg.net:80 --recv 548C16BF \
+  && apt-get update \
+  && apt-get install -y wget \
+  && echo "deb http://ftp.debian.org/debian jessie-backports main" | tee /etc/apt/sources.list.d/backports.list \
+  && wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add - \
   && echo "deb http://apt.newrelic.com/debian/ newrelic non-free" | tee /etc/apt/sources.list.d/newrelic.list \
   && apt-get update \
   && apt-get install -y openjdk-8-jdk libicu-dev libcurl4-gnutls-dev libxml2-dev libssl-dev libmcrypt-dev git unzip mongodb-org-shell mysql-client newrelic-php5 --no-install-recommends \
