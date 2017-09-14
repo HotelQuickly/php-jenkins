@@ -1,6 +1,6 @@
 FROM php:5.6-cli
 
-ENV ANT_VERSION 1.9.7
+ENV ANT_VERSION 1.9.9
 ENV NR_INSTALL_SILENT true
 
 RUN set -x \
