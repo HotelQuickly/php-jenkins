@@ -14,9 +14,16 @@ RUN set -x \
   && echo 'deb http://apt.newrelic.com/debian/ newrelic non-free' | tee /etc/apt/sources.list.d/newrelic.list \
   && echo "deb http://httpredir.debian.org/debian/ jessie-backports main" | tee /etc/apt/sources.list.d/backports.list \
   && apt-get update \
+  && apt-get install -y wget \
   && wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add - \
-  && apt install -y -t jessie-backports  openjdk-8-jre-headless ca-certificates-java \
-  && apt-get install -y openjdk-8-jdk libicu-dev libcurl4-gnutls-dev libxml2-dev libssl-dev libmcrypt-dev git unzip mongodb-org-shell mysql-client newrelic-php5 --no-install-recommends \
+  && apt-get update
+
+# INSTALL JAVA
+RUN apt install -y -t jessie-backports  openjdk-8-jre-headless ca-certificates-java \
+  && apt-get install -y openjdk-8-jdk libicu-dev libcurl4-gnutls-dev libxml2-dev libssl-dev libmcrypt-dev git unzip mongodb-org-shell mysql-client --no-install-recommends
+
+# INSTALL NEWRELIC
+RUN apt-get install -y newrelic-php5 --no-install-recommends \
   && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install -j$(nproc) bcmath mcrypt pdo pdo_mysql mysqli dom json xml tokenizer curl mbstring simplexml intl zip soap
